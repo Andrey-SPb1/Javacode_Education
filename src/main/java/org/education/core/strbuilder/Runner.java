@@ -1,4 +1,4 @@
-package org.education.strbuilder;
+package org.education.core.strbuilder;
 
 public class Runner {
 
