@@ -1,34 +1,36 @@
 package org.education.multithreading.bank;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
 public class BankAccount {
 
     private final int id;
 
-    private final AtomicInteger balance;
+    private Double balance;
 
-    public BankAccount(int id, int balance) {
+    public BankAccount(int id, double balance) {
         this.id = id;
-        this.balance = new AtomicInteger(balance);
+        this.balance = balance;
     }
 
-    public void deposit(int amount) {
-        balance.addAndGet(amount);
-    }
-
-    public boolean withdraw(int amount) {
-        if(amount > balance.get()){
-            System.out.println("Недостаточно средств");
-            return false;
-        }
-        else {
-            balance.addAndGet(-amount);
-            return true;
+    public void deposit(double amount) {
+        synchronized (this) {
+            balance += amount;
         }
     }
 
-    public int getBalance() {
-        return balance.get();
+    public boolean withdraw(double amount) {
+        synchronized (this) {
+            if (amount > balance) {
+                System.out.println("Недостаточно средств");
+                return false;
+            } else {
+                balance -= amount;
+                return true;
+            }
+        }
+    }
+
+    public double getBalance() {
+        return balance;
     }
 }
+

@@ -13,7 +13,7 @@ public class ConcurrentBank {
         this.accountIdCounter = new AtomicInteger(0);
     }
 
-    public BankAccount createAccount(int balance) {
+    public BankAccount createAccount(double balance) {
         int id = accountIdCounter.incrementAndGet();
         BankAccount bankAccount = new BankAccount(id, balance);
         accounts.put(id, bankAccount);
@@ -30,8 +30,8 @@ public class ConcurrentBank {
         return accounts.get(id);
     }
 
-    public int getTotalBalance() {
-        int totalBalance = 0;
+    public double getTotalBalance() {
+        double totalBalance = 0;
         for (BankAccount account : accounts.values()) {
             totalBalance += account.getBalance();
         }
