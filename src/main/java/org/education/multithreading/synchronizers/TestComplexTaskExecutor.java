@@ -18,7 +18,7 @@ public class TestComplexTaskExecutor {
         Thread thread2 = new Thread(testRunnable, "TestThread-2");
 
         thread1.start();
-        thread2.start();
+        thread2.start(); 
 
         try {
             thread1.join();
