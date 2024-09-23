@@ -20,10 +20,10 @@ public class ParallelStreamCollectMapAdvancedExample {
                         .map(entry -> new AbstractMap.SimpleEntry<>(entry.getKey(), entry.getValue())))
                 .collect(Collectors.groupingBy(
                         Map.Entry::getKey,
-                        Collectors.averagingDouble(Map.Entry::getValue)
+                        Collectors.averagingInt(Map.Entry::getValue)
                 ));
 
         averageGradesBySubject.forEach((subject, grade) ->
-                System.out.printf("Subject: %s, Average grade: %.2f%n", subject, grade));
+                System.out.printf("Subject: %s, Average grade: %.2f\n", subject, grade));
     }
 }
